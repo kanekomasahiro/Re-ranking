@@ -28,7 +28,7 @@ I train proposed model to distinguish negative example from positive example, wh
 - positive example: sentences in document-level English monolingual corpus
 
 We use Viterbi algorithm to optimally re-rank translated candidates on document-level.
-We use translated candidates as nodes and score path with quick thoughts [1].
+We use translated candidates as nodes and score path with Quick-Thought [1].
 We can score path considering a whole document.
 
 
