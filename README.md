@@ -61,9 +61,10 @@ We can score path considering a whole document.
 - Writing Viterbi algorithm.
 
 
-## TODO
+## Problems
 - I am writing code of reranker
     - My mentor teach me some tips!
+- N-best outputs and greedy output of NMT are different
 
 
 # Related Work
