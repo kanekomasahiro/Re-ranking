@@ -54,6 +54,8 @@ We can score path considering a whole document.
     - Previous method[2]:
     - Proposed method:
 
+Previous method consider context by window and score by similarity of the bag-of-word vector
+
 
 ## Progress
 - Training NMT model
