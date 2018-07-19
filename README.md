@@ -59,7 +59,6 @@ Previous method consider context by window and score by similarity of the bag-of
 
 ## Progress
 - Training NMT model
-- I get N-best output
 - Writing Viterbi algorithm.
 
 
