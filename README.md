@@ -17,7 +17,7 @@ Therefore, it becomes possible to translate the considering context using senten
 This is efficient because there are fewer document-level parallel corpus than sentence-level parallel corpus.
 
 
-## Proposed model (reranker)
+## Proposed model
 - Input: sentences translated by NMT
 - Output: score
 
