@@ -1,4 +1,4 @@
-# document level re-ranking
+# Document level re-ranking
 
 ## Key idea
 Re-ranking output of neural machine translation system to consider context information using a reranker pre-trained by Quick-Thought and Viterbi algorithm.
