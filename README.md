@@ -34,7 +34,7 @@ We can score path considering a whole document.
 
 ## Data (ja-en)
 - train
-    - open-subtitle 2018 (2M) http://opus.nlpl.eu/OpenSubtitles2018.php, http://data.statmt.org/acl18_contextnmt_data/
+    - open-subtitle 2018 (2M) http://opus.nlpl.eu/OpenSubtitles2018.php
     - ted (0.2M) https://wit3.fbk.eu/
 
 - dev
