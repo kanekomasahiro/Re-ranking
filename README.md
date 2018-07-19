@@ -64,8 +64,8 @@ Previous method consider context by window and score by similarity of the bag-of
 
 
 ## Problems
-- I am writing code of reranker
-    - My mentor teach me some tips!
+- I am writing code of reranker (I'm not familiar with initializing the parts of the model)
+    - My mentor gives me some tips!
 - N-best outputs and greedy output of NMT are different
 
 
