@@ -58,6 +58,7 @@ Previous method consider context by window and score by similarity of the bag-of
 
 
 ## Progresses
+- Pre-trained Quick-Thought model is publicly
 - Training NMT model
 - Writing Viterbi algorithm.
 
