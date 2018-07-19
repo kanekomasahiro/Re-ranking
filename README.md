@@ -1,83 +1,72 @@
 # NMT
 
 ## Key idea
-Using Reinforcement learning and re-ranking on document-level NMT to consider target side context.
+Re-ranking output of neural machine translation system to consider context information using a reranker pre-trained by Quick-Thought and Viterbi algorithm.
+
 
 ## Overview
-Considering the cross-sentence information can help to resolve ambiguities and inconsistencies of translation results.
-There are a lot of works to address context of source side so far.
-On the other hand, there are few works to address target side context.
-It is important to consider context of target side to keep the inconsistencies of the output.
-However, a problem of exposure bias exists while addressing target side context.
-So we propose a reinforcement learning model to address the exposure bias.
-Additionally we propose a re-ranking method to keep inconsistencies of the output on document-level.
-
-## Proposed model
-We extend [1] model (Transformer) to get context of target as input.
-We add the attention on previous target sentence to decoder of the model.
-
-
-## Reinforcement learning
-We use sentence-BLUE as reward to output sentence, and calculate discounted total reward.
-Can we give the same sentence reward to words in a sentence?
+We propose a re-ranking method to consider context information without parallel corpus of the document-level.
+Context information is very important for some NLP tasks.
+Because it has an effect on the ambiguity of the input sentence and the consistency of the output.
+On the other hand, previous document-level re-ranking methods can't effectively model sentence representation and relationship between each sentences.
+Moreover, the best sentences are determined by looking at only the temporal relationship, and the best sentences is not necessarily selected when looking at the whole document.
+Therefore, we acquire a more effective reranker by transfer-learning sentence vectors learned by considering relations between sentences.
+And we improve total quality in document-level by using Viterbi algorithm to select the sentence in the final selecting process.
+We propose the transfer learning without using the document-level parallel corpus.
+Therefore, it becomes possible to translate the considering context using sentence-level parallel corpora and document-level monolingual corpora only.
+This is efficient because there are fewer document-level parallel corpus than sentence-level parallel corpus.
 
 
-## Re-ranking
-We use Viterbi algorithm to optimally re-rank translated candidates on document-level. 
-We use translated candidates as nodes and score path with quick thoughts [3].
-We can score path considering a whole sentence.
+## Proposed model (reranker)
+- Input: sentences translated by NMT
+- Output: score
+
+Porposed method has some encoders (maybe 3 encoders) and output layer (maybe RNN).
+Each encoder is initialized by the encoder which is trained by Quick-Thought.
+I train proposed model to distinguish negative example from positive example, where gold label of negative example is 0 and gold label of positive example is 1.
+- negative example: sentences translated by NMT using document-level japanese monolingual corpus
+- positive example: sentences in document-level English monolingual corpus
+
+We use Viterbi algorithm to optimally re-rank translated candidates on document-level.
+We use translated candidates as nodes and score path with quick thoughts [1].
+We can score path considering a whole document.
 
 
-
-## Data
+## Data (ja-en)
 - train
-    - open-subtitle 2016 [8] (ge-en)
-    - open-subtitle 2016 [2] (en-fr)　http://opus.nlpl.eu/OpenSubtitles2016.php
-    - open-subtitle 2018 [1] (en-ru) http://opus.nlpl.eu/OpenSubtitles2018.php, http://data.statmt.org/acl18_contextnmt_data/
-    - open-subtitle [4] (zh-en) https://github.com/longyuewangdcu/tvsub
-    - LDC [4, 7] (zh-en)
-    - IWSLT' 15 [5] (en-de, en-fr, zh-en)
+    - open-subtitle 2018 (2M) http://opus.nlpl.eu/OpenSubtitles2018.php, http://data.statmt.org/acl18_contextnmt_data/
+    - ted (0.2M) https://wit3.fbk.eu/
+
 - dev
-    - open-subtitle 2016 [8] (ge-en)
-    - open-subtitle [4] (zh-en) https://github.com/longyuewangdcu/tvsub
-    - ted 10 [4] (zh-en)
-    - NIST02 [4] (zh-en)
-    - NIST05 [7] (zh-en)
-    - IWSLT' 12 [5] (en-de, en-fr)
+    - ted (9K)
+
 - test
-    - open-subtitle 2016 [8] (ge-en)
-    - open-subtitle [4] (zh-en) https://github.com/longyuewangdcu/tvsub
-    - discourse test set (en-fr) https://github.com/rbawden/discourse-mt-test-sets
-    - ted 10-13 [4] (zh-en)
-    - NIST06, NIST08 [7] (zh-en)
-    - NIST03-08 (zh-en)
-    - IWSLT' 14 [5] (en-de, en-fr)
-
-- other
-	- ted https://wit3.fbk.eu/
-
-[2] use OpenSubtitles2016. However, they did not explain how they split data to train, dev and test explicitly. 
-
-## Experiment
-We reimplement [1] model and compare it with proposed method.
-Corpora settings as in [4], since its target language is English and we can use publicly available quick thoughts model for English.
-We can use results from [4] as it is for comparison.
-
-## Analysis
-Comparison with the model [1] to verify the effect of considering the target context. 
-By comparing the outputs of baseline and proposed models, we show that proposed model outputs' consistency increased. 
-With ensemble vs without ensemble   
-With reinforcement learning vs without reimbursement learning 
+    - ted (2.6k)
 
 
+## Experiment (BLEU)
+- Train data (ted)
+    - Baseline (transfomer): 13.84 (dev), 12.97 (test)
+    - Previous method[2]:
+    - Proposed method:
+- Train data (open-subtitle)
+    - Baseline (transfomer): comeing soon!
+    - Previous method[2]:
+    - Proposed method:
 
 
-# Related Work of considering cross-sentence
-1. Context-Aware Neural Machine Translation Learns Anaphora Resolution, Elena Voita et al, ACL, 2018
-2. Evaluating Discourse Phenomena in Neural Machine Translation, Rachel Bawden et al, NAACL, 2018
-3. AN EFFICIENT FRAMEWORK FOR LEARNING.SENTENCE REPRESENTATIONS, Lajanugen Logeswaran et al, ICLR, 2018
-4. Learning to Remember Translation History with a Continuous Cache, Zhaopeng Tu et al, TACL, 2018
-5. Does Neural Machine Translation Benefit from Larger Context?, Sebastien Jean et al, arXiv, 2017
-6. Enabling Multi-Source Neural Machine Translation By Concatenating Source Sentences In Multiple Languages, Raj Dabre et al, arXiv, 2017
-7. Exploiting Cross-Sentence Context for Neural Machine Translation, Longyue Wang et al, EMNLP, 2017
-8. Neural Machine Translation with Extended Context, Jorg Tiedemann et al, DiscoMT, 2017
+## Progress
+- Training NMT model
+- I get N-best output
+- Writing Viterbi algorithm.
+
+
+## TODO
+- I am writing code of reranker
+    - My mentor teach me some tips!
+
+
+# Related Work
+1. AN EFFICIENT FRAMEWORK FOR LEARNING.SENTENCE REPRESENTATIONS, Lajanugen Logeswaran et al, ICLR, 2018
+2. Document-level Re-ranking
+with Soft Lexical and Semantic Features for Statistical Machine Translation, Chenchen Ding et al, AMTA, 2014
