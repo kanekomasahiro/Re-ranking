@@ -50,7 +50,7 @@ We can score path considering a whole document.
     - Previous method[2]:
     - Proposed method:
 - Train data (open-subtitle)
-    - Baseline (transfomer): comeing soon!
+    - Baseline (transfomer): coming soon!
     - Previous method[2]:
     - Proposed method:
 
