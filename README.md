@@ -19,7 +19,7 @@ This is efficient because there are fewer document-level parallel corpus than se
 
 ## Proposed model
 - Input: sentences translated by NMT
-- Output: score
+- Output: score considering the relationship between each sentences
 
 Porposed method has some encoders (maybe 3 encoders) and output layer (maybe RNN).
 Each encoder is initialized by the encoder which is trained by Quick-Thought.
