@@ -57,7 +57,7 @@ We can score path considering a whole document.
 Previous method consider context by window and score by similarity of the bag-of-word vector
 
 
-## Progress
+## Progresses
 - Training NMT model
 - Writing Viterbi algorithm.
 
