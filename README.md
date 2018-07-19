@@ -68,7 +68,7 @@ Previous method consider context by window and score by similarity of the bag-of
 - N-best outputs and greedy output of NMT are different
 
 
-# Related Work
+## Related Work
 1. AN EFFICIENT FRAMEWORK FOR LEARNING.SENTENCE REPRESENTATIONS, Lajanugen Logeswaran et al, ICLR, 2018
 2. Document-level Re-ranking
 with Soft Lexical and Semantic Features for Statistical Machine Translation, Chenchen Ding et al, AMTA, 2014
