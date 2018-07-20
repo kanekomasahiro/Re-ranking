@@ -27,11 +27,11 @@ import s2v_encoder
 
 FLAGS = tf.flags.FLAGS
 
-tf.flags.DEFINE_string("input_file_pattern", None,
+tf.flags.DEFINE_string("input_file_pattern", "/home/masahirokaneko/Re-ranking/model_data/train-?????-of-00100",
                        "File pattern of sharded TFRecord files containing")
-tf.flags.DEFINE_string("train_dir", None,
+tf.flags.DEFINE_string("train_dir", "/home/masahirokaneko/Re-ranking/model_train",
                        "Directory for saving and loading checkpoints.")
-tf.flags.DEFINE_integer("batch_size", 400, "Batch size")
+tf.flags.DEFINE_integer("batch_size", 256, "Batch size")
 tf.flags.DEFINE_float("uniform_init_scale", 0.1, "Random init scale")
 tf.flags.DEFINE_boolean("shuffle_input_data", False, "Whether to shuffle data")
 tf.flags.DEFINE_integer("input_queue_capacity", 640000, "Input data queue capacity")
@@ -47,9 +47,9 @@ tf.flags.DEFINE_integer("sequence_length", 30, "Max sentence length considered")
 tf.flags.DEFINE_integer("context_size", 1, "Prediction context size")
 tf.flags.DEFINE_boolean("dropout", False, "Use dropout")
 tf.flags.DEFINE_float("dropout_rate", 0.3, "Dropout rate")
-tf.flags.DEFINE_string("model_config", None, "Model configuration json")
+tf.flags.DEFINE_string("model_config", "../model_hyperparameter.json", "Model configuration json")
 tf.flags.DEFINE_integer("max_ckpts", 5, "Max number of ckpts to keep")
-tf.flags.DEFINE_string("Glove_path", None, "Path to Glove dictionary")
+tf.flags.DEFINE_string("Glove_path", "/home/masahirokaneko/pre-trained_model/dictionaries/GloVe/", "Path to Glove dictionary")
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
@@ -70,9 +70,10 @@ def main(unused_argv):
   g = tf.Graph()
   with g.as_default():
     for mdl_cfg in model_config:
-      model_config = configuration.model_config(mdl_cfg, mode="encode")
+      model_config = configuration.model_config(mdl_cfg, mode="train")
       encoder = s2v_encoder.s2v_encoder(model_config)
-      model = encoder.build_graph_from_config(model_config)
+      model = encoder.build_graph_from_config(model_config, mode="train")
+    exit()
     model.build()
 
     optimizer = tf.train.AdamOptimizer(FLAGS.learning_rate)

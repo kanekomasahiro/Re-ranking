@@ -43,20 +43,20 @@ import tensorflow as tf
 
 FLAGS = tf.flags.FLAGS
 
-tf.flags.DEFINE_string("input_files", None,
+tf.flags.DEFINE_string("input_files", "pos.txt,neg.txt",
                        "Comma-separated list of globs matching the input "
                        "files. The format of the input files is assumed to be "
                        "a list of newline-separated sentences, where each "
                        "sentence is already tokenized.")
 
-tf.flags.DEFINE_string("vocab_file", "",
+tf.flags.DEFINE_string("vocab_file", "/home/masahirokaneko/pre-trained_model/dictionaries/GloVe/glove.840B.300d.txt",
                        "(Optional) existing vocab file. Otherwise, a new vocab "
                        "file is created and written to the output directory. "
                        "The file format is a list of newline-separated words, "
                        "where the word id is the corresponding 0-based index "
                        "in the file.")
 
-tf.flags.DEFINE_string("output_dir", None, "Output directory.")
+tf.flags.DEFINE_string("output_dir", "/home/masahirokaneko/Re-ranking/model_data/", "Output directory.")
 
 tf.flags.DEFINE_integer("train_output_shards", 100,
                         "Number of output shards for the training set.")
@@ -99,7 +99,7 @@ def _build_vocabulary(input_files):
     vocab = collections.OrderedDict()
     with tf.gfile.GFile(FLAGS.vocab_file, mode="r") as f:
       for i, line in enumerate(f):
-        word = line.decode("utf-8").strip()
+        word = line.strip()
         if word in vocab:
           print('Duplicate word:', word)
         #assert word not in vocab, "Attempting to add word twice: %s" % word

@@ -132,7 +132,6 @@ class s2v(object):
     for v in self.config.vocab_configs:
 
       if v.mode == 'fixed':
-        '''
         if self.mode == "train":
           word_emb = tf.get_variable(
               name=v.name,
@@ -150,10 +149,9 @@ class s2v(object):
           self.init = (embedding_init, embedding_placeholder, word_init)
         
         else:
-        '''
-        word_emb = tf.get_variable(
-            name=v.name,
-            shape=[v.size, v.dim])
+          word_emb = tf.get_variable(
+              name=v.name,
+              shape=[v.size, v.dim])
 
         encode_emb = tf.nn.embedding_lookup(word_emb, self.encode_ids)
         self.word_emb = word_emb
@@ -247,6 +245,7 @@ class s2v(object):
     """
     names = ["","_out"]
     self.thought_vectors = []
+    print(self.config.encoder)
     for i in range(2):
       with tf.variable_scope("encoder" + names[i]) as scope:
         
@@ -264,10 +263,9 @@ class s2v(object):
 
 
   def build_output(self):
-    all_sen_embs = tf.stack(self.thought_vectors)
+    all_sen_embs = self.thought_vectors
     with tf.variable_scope("output") as scope:
-      length = tf.to_int32(tf.reduce_sum(self.encode_mask, 1), name="length")
-      cell = self._initialize_cell(self.config.output_dim, cell_type="GRU")
+      cell = self._initialize_cell(encoder_dim, cell_type=cell_type)
       outputs, state = tf.nn.dynamic_rnn(
           cell=cell,
           inputs=all_sen_embs,
@@ -285,7 +283,7 @@ class s2v(object):
       self.total_loss
     """
 
-    all_pres = self.scores
+    all_pres = self.score
 
     # Ignore source sentence
     scores = tf.matrix_set_diag(scores, np.zeros(FLAGS.batch_size))

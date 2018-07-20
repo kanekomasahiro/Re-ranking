@@ -141,7 +141,7 @@ class s2v_encoder(object):
 
     return _restore_fn
 
-  def build_graph_from_config(self, model_config): #, checkpoint_path):
+  def build_graph_from_config(self, model_config, mode="encode"): #, checkpoint_path):
     """Builds the inference graph from a configuration object.
 
     Args:
@@ -154,8 +154,11 @@ class s2v_encoder(object):
         from the checkpoint file.
     """
     tf.logging.info("Building model.")
-    model = s2v_model.s2v(model_config, mode="encode")
-    model.build_enc()
+    model = s2v_model.s2v(model_config, mode=mode)
+    if mode == "train":
+      model.build()
+    elif mode == "encode":
+      model.build_enc()
     self._embeddings = model.word_embeddings
     saver = tf.train.Saver()
     checkpoint_path = model_config.checkpoint_path

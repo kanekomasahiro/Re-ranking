@@ -47,9 +47,10 @@ def model_config(mdl_config, mode):
   config = _HParams()
   config.encoder = mdl_config['encoder']
   config.encoder_dim = mdl_config['encoder_dim']
+  config.output_dim = mdl_config['output_dim']
   config.bidir = mdl_config['bidir']
   if mdl_config['checkpoint_path']:
-    config.checkpoint_path = os.path.join(FLAGS.results_path, mdl_config['checkpoint_path'])
+    config.checkpoint_path = os.path.join(mdl_config['checkpoint_path'])
   config.vocab_configs = []
   for vocab_configs in mdl_config['vocab_configs']:
     config.vocab_configs.append(vocab_config(vocab_configs, mode))
