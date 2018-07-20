@@ -71,9 +71,11 @@ def main(unused_argv):
   with g.as_default():
     for mdl_cfg in model_config:
       model_config = configuration.model_config(mdl_cfg, mode="train")
-      encoder = s2v_encoder.s2v_encoder(model_config)
-      model = encoder.build_graph_from_config(model_config, mode="train")
-    model.build()
+      #encoder = s2v_encoder.s2v_encoder(model_config)
+      model = s2v_model.s2v(model_config, mode="train")
+      model.build()
+      #model = encoder.build_graph_from_config(model_config, mode="train")
+    checkpoint_path = model_config.checkpoint_path
 
     optimizer = tf.train.AdamOptimizer(FLAGS.learning_rate)
 
@@ -81,17 +83,15 @@ def main(unused_argv):
         total_loss=model.total_loss,
         optimizer=optimizer,
         clip_gradient_norm=FLAGS.clip_gradient_norm)
-        #global_step=model.global_step,
 
-    if FLAGS.max_ckpts != 5:
-      saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
-    else:
-      saver = tf.train.Saver()
+    saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
 
   load_words = model.init
   if load_words:
     def InitAssignFn(sess):
       sess.run(load_words[0], {load_words[1]: load_words[2]})
+
+  saver.restore(sess, checkpoint_path)
 
   nsteps = int(FLAGS.nepochs * (FLAGS.num_train_inst / FLAGS.batch_size))
   tf.contrib.slim.learning.train(
