@@ -73,7 +73,6 @@ def main(unused_argv):
       model_config = configuration.model_config(mdl_cfg, mode="train")
       encoder = s2v_encoder.s2v_encoder(model_config)
       model = encoder.build_graph_from_config(model_config, mode="train")
-    exit()
     model.build()
 
     optimizer = tf.train.AdamOptimizer(FLAGS.learning_rate)

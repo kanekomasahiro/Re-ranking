@@ -285,30 +285,11 @@ class s2v(object):
       self.total_loss
     """
 
-    all_pres = self.scores
+    pres = self.scores
 
-    # Ignore source sentence
-    scores = tf.matrix_set_diag(scores, np.zeros(FLAGS.batch_size))
-
-    # Targets
-    targets_np = np.zeros((FLAGS.batch_size, FLAGS.batch_size))
-    ctxt_sent_pos = range(-FLAGS.context_size, FLAGS.context_size + 1)
-    ctxt_sent_pos.remove(0)
-    for ctxt_pos in ctxt_sent_pos:
-      targets_np += np.eye(FLAGS.batch_size, k=ctxt_pos)
-
-    targets_np_sum = np.sum(targets_np, axis=1, keepdims=True)
-    targets_np = targets_np/targets_np_sum
-    targets = tf.constant(targets_np, dtype=tf.float32)
-
-    # Forward and backward scores    
-    f_scores = scores[:-1] 
-    b_scores = scores[1:]
-
-    losses = tf.nn.softmax_cross_entropy_with_logits(
-        labels=targets, logits=scores)
+    loss = tf.reduce_mean(tf.square(pres - 0))
+    #loss = tf.reduce_mean(tf.square(scores - golds))
   
-    loss = tf.reduce_mean(losses)
 
     tf.summary.scalar("losses/ent_loss", loss)
     self.total_loss = loss

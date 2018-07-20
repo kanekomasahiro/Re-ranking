@@ -223,7 +223,6 @@ class s2v_encoder(object):
       tokenized = self._tokenize(item)
 
       tokenized_word_embs = [self._word_to_embedding(w, word_to_embedding) for w in tokenized]
-
       preprocessed_data.append(tokenized_word_embs)
 
     return preprocessed_data
