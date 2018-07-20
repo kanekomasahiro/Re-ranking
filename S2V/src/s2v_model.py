@@ -262,6 +262,20 @@ class s2v(object):
         self.thought_vectors.append(thought_vectors)
 
 
+  def build_output(self):
+    all_sen_embs = self.thought_vectors
+    with tf.variable_scope("output") as scope:
+      cell = self._initialize_cell(encoder_dim, cell_type=cell_type)
+      outputs, state = tf.nn.dynamic_rnn(
+          cell=cell,
+          inputs=all_sen_embs,
+          sequence_length=length,
+          dtype=tf.float32,
+          scope=scope)
+      output = tf.layers.dense(state, 1, activation=tf.nn.relu, name="output_layer")
+      self.scores = tf.nn.sigmoid(output)
+
+
   def build_loss(self):
     """Builds the loss Tensor.
 
@@ -269,17 +283,7 @@ class s2v(object):
       self.total_loss
     """
 
-    all_sen_embs = self.thought_vectors
-  
-    if FLAGS.dropout:
-      mask_shp = [1, self.config.encoder_dim]
-      bin_mask = tf.random_uniform(mask_shp) > FLAGS.dropout_rate
-      bin_mask = tf.where(bin_mask, tf.ones(mask_shp), tf.zeros(mask_shp))
-      src = all_sen_embs[0] * bin_mask
-      dst = all_sen_embs[1] * bin_mask
-      scores = tf.matmul(src, dst, transpose_b=True)
-    else:
-      scores = tf.matmul(all_sen_embs[0], all_sen_embs[1], transpose_b=True)
+    all_pres = self.score
 
     # Ignore source sentence
     scores = tf.matrix_set_diag(scores, np.zeros(FLAGS.batch_size))
