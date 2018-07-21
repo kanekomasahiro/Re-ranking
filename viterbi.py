@@ -35,7 +35,7 @@ def viterbi(documents):
       pre_nbest = candidates[1]
       scores = np.array(model.inference(pre_nbest, cur_nbest))
       scores = sigmoid(scores)
-      scores += broadcast_to(np.array(best_score[i]), (len(best_score[i]), len(best_score[i]))).T.reshape(-1)
+      scores += np.broadcast_to(np.array(best_score[i]), (len(best_score[i]), len(best_score[i]))).T.reshape(-1)
       best_edge[i][j] = np.argmax(scores.reshape(len(best_score[i]), len(best_score[i])), axis=1)
       best_score[i][j] = np.max(scores, axis=1)
   best_edge = dict(best_edge)
