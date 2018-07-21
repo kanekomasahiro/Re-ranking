@@ -85,13 +85,17 @@ def main(unused_argv):
         optimizer=optimizer,
         clip_gradient_norm=FLAGS.clip_gradient_norm)
 
-  #saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
+  saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
+  '''
   variables_to_restore = slim.get_model_variables()
   init_assign_op, init_feed_dict = slim.assign_from_checkpoint(
           checkpoint_path, variables_to_restore)
+  '''
   # Create an initial assignment function.
-  def InitAssignFn(sess):
-    sess.run(init_assign_op, init_feed_dict)
+  #def InitAssignFn(sess):
+    #sess.run(init_assign_op, init_feed_dict)
+  sess.run()
+  exit()
 
   #saver.restore(sess, checkpoint_path)
 
@@ -104,7 +108,8 @@ def main(unused_argv):
       save_summaries_secs=FLAGS.save_summaries_secs,
       saver=saver,
       save_interval_secs=FLAGS.save_model_secs, 
-      init_fn=InitAssignFn
+      init_fn=sess.run()
+      #init_fn=InitAssignFn
   )
 
 if __name__ == "__main__":
