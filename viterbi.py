@@ -3,7 +3,8 @@ from collections import defaultdict
 import numpy as np
 import sys
 sys.path.append('/home/kaneko/S2V/')
-from scoring import Scoring
+#from scoring import Scoring
+import pickle
 
 fw = open('re_ranking.txt', 'w')
 
@@ -19,55 +20,46 @@ document = [['I have a pen .', 'You are a pen .', 'I think your pen .'],
 
 
 def sigmoid(x):
-    return 1.0 / (1.0 + np.exp(-x))
+  return 1.0 / (1.0 + np.exp(-x))
 
 
-def viterbi(document):
-    model = Scoring()
+def viterbi(documents):
+  model = Scoring()
+  for document in documents:
     best_edge = defaultdict(lambda: ['NULL' for _ in range(len(document[0]))])
     best_score = defaultdict(lambda: [0 for _ in range(len(document[0]))])
 
     # forward
     for i, candidates in enumerate(document, 1):
-        for j, candidate in enumerate(candidates):
-            pre_sentences = document[i-1]
-            cur_sentences = [candidate for _ in range(len(document[i-1]))]
-            scores = np.array(model.inference(pre_sentences, cur_sentences))
-            scores = sigmoid(scores)
-            scores += np.array(best_score[i])
-            best_edge[i][j] = np.argmax(scores)
-            best_score[i][j] = np.max(scores)
-            '''
-            for k in range(len(candidates)):
-                score = best_score[i-1][k] + model.inference([document[i-1][k]], [candidate])
-                if score > best_score[i][j]:
-                    best_edge[i][j] = k
-                    best_score[i][j] = score
-            '''
-    best_edge = dict(best_edge)
-    best_score = dict(best_score)
+      cur_nbest = candidates[0]
+      pre_nbest = candidates[1]
+      scores = np.array(model.inference(pre_nbest, cur_nbest))
+      scores = sigmoid(scores)
+      scores += broadcast_to(np.array(best_score[i]), (len(best_score[i]), len(best_score[i]))).T.reshape(-1)
+      best_edge[i][j] = np.argmax(scores.reshape(len(best_score[i]), len(best_score[i])), axis=1)
+      best_score[i][j] = np.max(scores, axis=1)
+  best_edge = dict(best_edge)
+  best_score = dict(best_score)
 
-    # backward
-    best_path = []
-    next_edge = np.argmax(np.array(best_score[len(document)]))
-    best_path += [next_edge]
-    for i in range(len(document))[:0:-1]:
-        next_edge = best_edge[i][next_edge]
-        best_path += [next_edge]
-    best_path = [edge for edge in best_path[::-1]]
-    results = [document[i][edge] for i, edge in enumerate(best_path)]
+  # backward
+  best_path = []
+  next_edge = np.argmax(np.array(best_score[len(document)]))
+  best_path += [next_edge]
+  for i in range(len(document))[:0:-1]:
+      next_edge = best_edge[i][next_edge]
+      best_path += [next_edge]
+  best_path = [edge for edge in best_path[::-1]]
+  results = [document[i][edge] for i, edge in enumerate(best_path)]
 
-    return results
+  return results
 
 
 def main():
-    document = []
-    for l in open('gec.dev.en.50best.translation'):
-        document.append([sentence.strip() for sentence in l.split('\t')])
-        #document = [' '.join(word_tokenize(word)) for l in l.split()]
-    results = viterbi(document)
-    for result in results:
-        fw.write(result+'\n')
+  fr = open('vitervi.data', 'rb')
+  documents = pickle.load(fr)
+  results = viterbi(documents)
+  for result in results:
+      fw.write(result+'\n')
 
 if __name__=="__main__":
-    main()
+  main()
