@@ -46,8 +46,8 @@ def viterbi(documents):
   next_edge = np.argmax(np.array(best_score[len(document)]))
   best_path += [next_edge]
   for i in range(len(document))[:0:-1]:
-      next_edge = best_edge[i][next_edge]
-      best_path += [next_edge]
+    next_edge = best_edge[i][next_edge]
+    best_path += [next_edge]
   best_path = [edge for edge in best_path[::-1]]
   results = [document[i][edge] for i, edge in enumerate(best_path)]
 
@@ -60,6 +60,7 @@ def main():
   results = viterbi(documents)
   for result in results:
       fw.write(result+'\n')
+
 
 if __name__=="__main__":
   main()
