@@ -19,6 +19,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+from tensorflow.contrib import slim
 import json
 
 import configuration
@@ -84,17 +85,18 @@ def main(unused_argv):
         optimizer=optimizer,
         clip_gradient_norm=FLAGS.clip_gradient_norm)
 
-    saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
+  #saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
+  variables_to_restore = slim.get_model_variables()
+  init_assign_op, init_feed_dict = slim.assign_from_checkpoint(
+          checkpoint_path, variables_to_restore)
+  # Create an initial assignment function.
+  def InitAssignFn(sess):
+    sess.run(init_assign_op, init_feed_dict)
 
-  load_words = model.init
-  if load_words:
-    def InitAssignFn(sess):
-      sess.run(load_words[0], {load_words[1]: load_words[2]})
-
-  saver.restore(sess, checkpoint_path)
+  #saver.restore(sess, checkpoint_path)
 
   nsteps = int(FLAGS.nepochs * (FLAGS.num_train_inst / FLAGS.batch_size))
-  tf.contrib.slim.learning.train(
+  slim.learning.train(
       train_op=train_tensor,
       logdir=FLAGS.train_dir,
       graph=g,
@@ -102,7 +104,7 @@ def main(unused_argv):
       save_summaries_secs=FLAGS.save_summaries_secs,
       saver=saver,
       save_interval_secs=FLAGS.save_model_secs, 
-      init_fn=InitAssignFn if load_words else None
+      init_fn=InitAssignFn
   )
 
 if __name__ == "__main__":
