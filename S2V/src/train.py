@@ -12,19 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Train the skip-thoughts model."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-from tensorflow.contrib import slim
 import json
 
 import configuration
 import s2v_model
-import s2v_encoder
 
 FLAGS = tf.flags.FLAGS
 
@@ -32,7 +29,7 @@ tf.flags.DEFINE_string("input_file_pattern", "/home/masahirokaneko/Re-ranking/mo
                        "File pattern of sharded TFRecord files containing")
 tf.flags.DEFINE_string("train_dir", "/home/masahirokaneko/Re-ranking/model_train",
                        "Directory for saving and loading checkpoints.")
-tf.flags.DEFINE_integer("batch_size", 256, "Batch size")
+tf.flags.DEFINE_integer("batch_size", 400, "Batch size")
 tf.flags.DEFINE_float("uniform_init_scale", 0.1, "Random init scale")
 tf.flags.DEFINE_boolean("shuffle_input_data", False, "Whether to shuffle data")
 tf.flags.DEFINE_integer("input_queue_capacity", 640000, "Input data queue capacity")
@@ -63,16 +60,12 @@ def main(unused_argv):
   with open(FLAGS.model_config) as json_config_file:
     model_config = json.load(json_config_file)
 
-
+  model_config = configuration.model_config(model_config, mode="train")
   tf.logging.info("Building training graph.")
   g = tf.Graph()
   with g.as_default():
-    model_config = configuration.model_config(model_config, mode="train")
-    #encoder = s2v_encoder.s2v_encoder(model_config)
     model = s2v_model.s2v(model_config, mode="train")
     model.build()
-    #model = encoder.build_graph_from_config(model_config, mode="train")
-    checkpoint_path = model_config.checkpoint_path
 
     optimizer = tf.train.AdamOptimizer(FLAGS.learning_rate)
 
@@ -82,22 +75,16 @@ def main(unused_argv):
         clip_gradient_norm=FLAGS.clip_gradient_norm)
 
     saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
-    #saver.restore(sess, checkpoint_path)
-  '''
-  variables_to_restore = slim.get_model_variables()
-  init_assign_op, init_feed_dict = slim.assign_from_checkpoint(
-          checkpoint_path, variables_to_restore)
-  '''
-  # Create an initial assignment function.
-  #def InitAssignFn(sess):
-    #sess.run(init_assign_op, init_feed_dict)
-  #sess.run()
-  exit()
 
-  #saver.restore(sess, checkpoint_path)
+  '''
+  load_words = model.init
+  if load_words:
+    def InitAssignFn(sess):
+      sess.run(load_words[0], {load_words[1]: load_words[2]})
+  '''
 
   nsteps = int(FLAGS.nepochs * (FLAGS.num_train_inst / FLAGS.batch_size))
-  slim.learning.train(
+  tf.contrib.slim.learning.train(
       train_op=train_tensor,
       logdir=FLAGS.train_dir,
       graph=g,
@@ -105,8 +92,8 @@ def main(unused_argv):
       save_summaries_secs=FLAGS.save_summaries_secs,
       saver=saver,
       save_interval_secs=FLAGS.save_model_secs, 
-      init_fn=sess.run()
-      #init_fn=InitAssignFn
+      #init_fn=InitAssignFn if load_words else None
+      init_fn=None
   )
 
 if __name__ == "__main__":
