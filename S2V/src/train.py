@@ -63,19 +63,15 @@ def main(unused_argv):
   with open(FLAGS.model_config) as json_config_file:
     model_config = json.load(json_config_file)
 
-  if type(model_config) is dict:
-    model_config = [model_config]
-
 
   tf.logging.info("Building training graph.")
   g = tf.Graph()
   with g.as_default():
-    for mdl_cfg in model_config:
-      model_config = configuration.model_config(mdl_cfg, mode="train")
-      #encoder = s2v_encoder.s2v_encoder(model_config)
-      model = s2v_model.s2v(model_config, mode="train")
-      model.build()
-      #model = encoder.build_graph_from_config(model_config, mode="train")
+    model_config = configuration.model_config(model_config, mode="train")
+    #encoder = s2v_encoder.s2v_encoder(model_config)
+    model = s2v_model.s2v(model_config, mode="train")
+    model.build()
+    #model = encoder.build_graph_from_config(model_config, mode="train")
     checkpoint_path = model_config.checkpoint_path
 
     optimizer = tf.train.AdamOptimizer(FLAGS.learning_rate)
@@ -85,7 +81,8 @@ def main(unused_argv):
         optimizer=optimizer,
         clip_gradient_norm=FLAGS.clip_gradient_norm)
 
-  saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
+    saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
+    #saver.restore(sess, checkpoint_path)
   '''
   variables_to_restore = slim.get_model_variables()
   init_assign_op, init_feed_dict = slim.assign_from_checkpoint(
@@ -94,7 +91,7 @@ def main(unused_argv):
   # Create an initial assignment function.
   #def InitAssignFn(sess):
     #sess.run(init_assign_op, init_feed_dict)
-  sess.run()
+  #sess.run()
   exit()
 
   #saver.restore(sess, checkpoint_path)
