@@ -79,17 +79,12 @@ def main(unused_argv):
 
     checkpoint_path = model_config.checkpoint_path
     variables_to_restore = slim.get_model_variables()
+    checkpoint_path = tf.train.latest_checkpoint(model_config.checkpoint_path)
     init_assign_op, init_feed_dict = slim.assign_from_checkpoint(
         checkpoint_path, variables_to_restore)
 
     def InitAssignFn(sess):
       sess.run(init_assign_op, init_feed_dict)
-  '''
-  load_words = model.init
-  if load_words:
-    def InitAssignFn(sess):
-      sess.run(load_words[0], {load_words[1]: load_words[2]})
-  '''
 
   nsteps = int(FLAGS.nepochs * (FLAGS.num_train_inst / FLAGS.batch_size))
   slim.learning.train(
