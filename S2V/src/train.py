@@ -18,6 +18,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+from tensorflow.contrib import slim
 import json
 
 import configuration
@@ -76,6 +77,13 @@ def main(unused_argv):
 
     saver = tf.train.Saver(max_to_keep=FLAGS.max_ckpts)
 
+    checkpoint_path = model_config.checkpoint_path
+    variables_to_restore = slim.get_model_variables()
+    init_assign_op, init_feed_dict = slim.assign_from_checkpoint(
+        checkpoint_path, variables_to_restore)
+
+    def InitAssignFn(sess):
+      sess.run(init_assign_op, init_feed_dict)
   '''
   load_words = model.init
   if load_words:
@@ -84,16 +92,15 @@ def main(unused_argv):
   '''
 
   nsteps = int(FLAGS.nepochs * (FLAGS.num_train_inst / FLAGS.batch_size))
-  tf.contrib.slim.learning.train(
+  slim.learning.train(
       train_op=train_tensor,
       logdir=FLAGS.train_dir,
       graph=g,
       number_of_steps=nsteps,
       save_summaries_secs=FLAGS.save_summaries_secs,
       saver=saver,
-      save_interval_secs=FLAGS.save_model_secs, 
-      #init_fn=InitAssignFn if load_words else None
-      init_fn=None
+      save_interval_secs=FLAGS.save_model_secs,
+      init_fn=InitAssignFn
   )
 
 if __name__ == "__main__":
