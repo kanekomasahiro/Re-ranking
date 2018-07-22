@@ -30,7 +30,7 @@ tf.flags.DEFINE_string("input_file_pattern", "/home/masahirokaneko/Re-ranking/mo
                        "File pattern of sharded TFRecord files containing")
 tf.flags.DEFINE_string("train_dir", "/home/masahirokaneko/Re-ranking/model_train",
                        "Directory for saving and loading checkpoints.")
-tf.flags.DEFINE_integer("batch_size", 400, "Batch size")
+tf.flags.DEFINE_integer("batch_size", 2, "Batch size")
 tf.flags.DEFINE_float("uniform_init_scale", 0.1, "Random init scale")
 tf.flags.DEFINE_boolean("shuffle_input_data", False, "Whether to shuffle data")
 tf.flags.DEFINE_integer("input_queue_capacity", 640000, "Input data queue capacity")

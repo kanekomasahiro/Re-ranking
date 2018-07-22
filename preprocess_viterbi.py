@@ -33,6 +33,7 @@ def main():
   documents += [document]
   documents.pop(0)
 
+  data_dict = {}
   data = []
   for i, document in enumerate(documents):
     doc_data = []

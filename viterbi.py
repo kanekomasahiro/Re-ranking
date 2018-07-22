@@ -26,8 +26,8 @@ def sigmoid(x):
 def viterbi(documents):
   model = Scoring()
   for document in documents:
-    best_edge = defaultdict(lambda: ['NULL' for _ in range(len(document[0]))])
-    best_score = defaultdict(lambda: [0 for _ in range(len(document[0]))])
+    best_edge = defaultdict(lambda: ['NULL' for _ in range(len(document[0][0]))])
+    best_score = defaultdict(lambda: [0 for _ in range(len(document[0][0]))])
 
     # forward
     for i, candidates in enumerate(document, 1):

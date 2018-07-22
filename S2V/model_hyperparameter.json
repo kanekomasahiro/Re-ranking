@@ -11,7 +11,7 @@
 		"name": "word_embedding",
 		"cap": false,
 		"dim": 300,
-		"size": 2196018,
+		"size": 1000,
 		"vocab_file": "glove.840B.300d.txt",
 		"embs_file": ""
 	}
