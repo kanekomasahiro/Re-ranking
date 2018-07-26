@@ -57,11 +57,11 @@ We use softmax function in training and sigmoid function in inference.
 - TED train corpus is document corpus but I train MT model by sentence-level to check our proposed method effect.
 - We use TED dev corpus for transfer learning of reranker. 420文だけ分割してdevとして使う
   - train: 0.2M
-  - dev: 9k
+  - dev: 9.3k
   - test: 2.6k
 
 - NMT model
-  - transfomer
+  - transfomer: default setting of tensor2tensor
 
 ## Experiment (BLEU)
 | Model | BLEU |
