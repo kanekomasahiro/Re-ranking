@@ -25,8 +25,8 @@ We need to do the below things before re-ranking
 1. Training the Machine Translation (MT) model by sentence-level parallel corpus
 2. MT model generates N-best candidates  
 
-We find out the best sentences combination by viterbi algorithm
-3. Reranker scores each pass made by candidates (forward)
+We find out the best sentences combination by viterbi algorithm  
+3. Reranker scores each pass made by candidates (forward)  
 4. We (backward)
 
 
@@ -36,7 +36,7 @@ We find out the best sentences combination by viterbi algorithm
 
 Porposed method has two encoders and output layer.
 
-## How to train Proposed model (reranker)
+## How to train Proposed model (Reranker)
 ![how to train model](/images/ma.png "ma")
 
 
