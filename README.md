@@ -1,4 +1,4 @@
-# Document level re-ranking (DoRe) for NMT
+# Documentlevel re-ranking (DoRe) for NMT
 
 This code is based on Lajanugen Logeswaran's TensorFlow [Quick-Thought Vectors](https://github.com/lajanugen/S2V) code.
 
