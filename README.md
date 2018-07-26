@@ -3,7 +3,7 @@
 This code is based on Lajanugen Logeswaran's TensorFlow [Quick-Thought Vectors](https://github.com/lajanugen/S2V) code.
 
 
-## Who am I
+## Who am I?
 [Masahiro Kaneko](https://sites.google.com/view/masahirokaneko)
 
 
@@ -87,7 +87,12 @@ We use softmax function for training and sigmoid function for testing.
 
 
 ## Thank you
-- Mentor: 
+- Mentor: Hyeongseok Oh (Kakao Brain)
+- Supervisor: [Mamoru Komachi](http://cl.sd.tmu.ac.jp/~komachi/index.en.html) (Tokyo Metropolitan University: TMU)
+- [Aizhan Imankulova](https://atimankulova.wixsite.com/mysite) (Tokyo Metropolitan University: TMU)
+- Wonchang Chung (Element AI)
+- Raj Dabre (National Institute of Information and Communications Technology: NICT)
+- My appreciation to camp participants and organizers
 
 
 ## Related Work
