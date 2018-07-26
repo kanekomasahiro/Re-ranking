@@ -23,7 +23,8 @@ We need to do the below things before re-ranking:
 1. Training the MT model by sentence-level parallel corpus
 2. MT model generates N-best translated candidates  
 
-Our proposed re-ranking method
+Our proposed re-ranking method is below:
+
 
 
 
