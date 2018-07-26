@@ -3,22 +3,22 @@
 This code is based on Lajanugen Logeswaran's TensorFlow [Quick-Thought Vectors](https://github.com/lajanugen/S2V) code.
 
 ## Key idea
-Re-ranking output of neural machine translation system to consider context information using a reranker pre-trained by Quick-Thought and Viterbi algorithm.
+Re-ranking the output of neural machine translation (NMT) system by considering the context information using a reranker pre-trained by Quick-Thought and Viterbi algorithm.
 
 
 ## Overview
-We propose a re-ranking method to consider context information effectively by using transfer learning and viterbi algorithm on few parallel corpus of the document-level.
-Context information is very important for some NLP tasks, because it has an effect on the ambiguity of the input sentence and the consistency of the output.
+We propose a re-ranking method which effectively consider the context information by using transfer learning and Viterbi algorithm on low-resource document-level parallel corpus.
+Context information is very important for some NLP tasks, because it has an effect on the ambiguity of the input sentence and the consistency of the output sentences.
 On the other hand, previous document-level re-ranking methods can't effectively model sentence representation and relationship between each sentences.
-Moreover, the best sentences are determined by looking at only the temporal relationship, and the best sentences are not necessarily selected when looking at the whole document.
-Therefore, we acquire a more effective reranker by transfer-learning sentence vectors learned by considering relations between sentences.
-And we improve total quality in document-level by using viterbi algorithm to select the sentence in the final selecting process.
-We propose the transfer learning using few parallel corpora in document-level.
-Therefore, it becomes possible to translate the considering context using only few document-level parallel corpora and document-level monolingual corpora of target side.
-This is efficient because there are fewer document-level parallel corpus than sentence-level 
+Moreover, the best candidates are determined by looking at only the temporal relationship, and the best candidates are not necessarily selected when looking at the whole document.
+Therefore, we acquire a more effective reranker by transfer-learning sentence vectors learned by considering relationship between sentences.
+And we improve total quality on document-level by using Viterbi algorithm to select the best candidates in the final selecting process.
+We propose the transfer learning using low-resource document-level parallel corpus.
+Therefore, it becomes possible to translate by considering the context using low-resource document-level parallel corpora and high-resource document-level monolingual corpora of the target side.
+This is efficient in cases where there exists fewer document-level parallel corpora than sentence-level parallel corpora.
 
 
-## Flow of re-ranking by using viterbi algorithm
+## Flow of re-ranking using Viterbi algorithm
 ![vitebi](/images/viterbi.png "viterbi")
 <div align="center">
 <img src="/images/parts.png" width="50%">
@@ -63,7 +63,7 @@ We use softmax function in training and sigmoid function in inference.
 - NMT model
   - transfomer: default setting of tensor2tensor
 
-## Experiment ([BLEU](https://en.wikipedia.org/wiki/BLEU))
+## Experiment (BLEU)
 | Model | BLEU |
 ----|---- 
 | w/o re-ranking (baseline) | 12.85 |
