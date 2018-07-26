@@ -21,23 +21,18 @@ This is efficient because there are fewer document-level parallel corpus than se
 ## Flow of re-ranking by using viterbi algorithm
 ![vitebi](/images/viterbi.png "viterbi")
 
-We need to do the below things before re-ranking
-1. Training the Machine Translation (MT) model by sentence-level parallel corpus
-2. MT model generates N-best candidates  
-
-We find out the best sentences combination by viterbi algorithm  
-3. Reranker scores each pass made by candidates (forward)  
-4. We (backward)
-
+1. Training the Machine Translation (MT) model by sentence-level parallel corpus and MT model generates N-best candidates
+2. Reranker scores each pass made by candidates (forward)
+3. 後ろから最適なパスをたどることでベストな組み合わせを見つける (backward)
 
 
 ## Architecture of Proposed model (Reranker)
-![architecture of model](/images/model.png "model")
+![architecture of model](/images/ma.png "ma")
 
 Porposed method has two encoders and output layer.
 
 ## How to train Proposed model (Reranker)
-![how to train model](/images/ma.png "ma")
+![how to train model](/images/model.png "model")
 
 
 ## Proposed model (Reranker)
