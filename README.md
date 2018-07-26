@@ -37,6 +37,10 @@ This is efficient in cases where there exists fewer document-level parallel corp
 2. Score each pass between candidates (forward) using DoRe
 3. Find the best combination by tracing the best path from the end (backward)
 
+
+## Quick-Thought (QT)
+![Quick-Thought](/images/QT.png "qt")
+
 ## Architecture of Proposed model (DoRe)
 ![architecture of model](/images/ma.png "ma")
 
@@ -70,9 +74,9 @@ We use softmax function for training and sigmoid function for testing.
   - test: 2.6k
 
 - NMT model
-  - transfomer: default setting of tensor2tensor
+  - transfomer: default setting of tensor2tensor, NMT trained on sentence-level
 - Models
-  - w/o re-ranking (baseline): NMT trained on sentence-level, 1-best
+  - w/o re-ranking (baseline): 1-best
   - QT 20-best: Reranking the 20-best candidates using QT
   - DoRe 20-best: Reranking the 20-best candidates using proposed approach
 
