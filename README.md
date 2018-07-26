@@ -88,6 +88,7 @@ We use softmax function in training and sigmoid function in inference.
 - [Aizhan Imankulova](https://atimankulova.wixsite.com/mysite) (Tokyo Metropolitan University: TMU)
 - Wonchang Chung (Element AI)
 - Raj Dabre (National Institute of Information and Communications Technology: NICT)
+- キャンプの参加者と関係
 
 
 
