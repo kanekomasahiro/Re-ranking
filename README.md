@@ -84,7 +84,11 @@ We use softmax function in training and sigmoid function in inference.
 
 ## Thank you
 - Mentor: Hyeongseok Oh (Kakao Brain)
+- Superviser: [Mamoru Komachi](http://cl.sd.tmu.ac.jp/~komachi/index.en.html) (Tokyo Metropolitan University: TMU)
+- [Mamoru Komachi](https://atimankulova.wixsite.com/mysite) (Tokyo Metropolitan University: TMU)
 - Wonchang Chung (Element AI)
+- Raj Dabre (National Institute of Information and Communications Technology: NICT)
+
 
 
 ## Related Work
