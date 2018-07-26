@@ -71,12 +71,13 @@ We use softmax function for training and sigmoid function for testing.
 
 
 ## Experiment setting
-- We use document-level [TED corpus](https://wit3.fbk.eu/) (Japanese->English) for experiments.
-- TED is document-level corpus, however I train NMT model on sentence-level to examine the effect of our proposed method.
-- We use TED dev set for transfer learning of DoRe. We split only 420 sentences and used it as dev set for transfer learning.
-  - train: 200k
-  - dev: 9.3k
-  - test: 2.6k
+- Data
+  - We use document-level [TED corpus](https://wit3.fbk.eu/) (Japanese->English) for experiments.
+  - TED is document-level corpus, however I train NMT model on sentence-level to examine the effect of our proposed method.
+  - We use TED dev set for transfer learning of DoRe. We split only 420 sentences and used it as dev set for transfer learning.
+    - train: 200k
+    - dev: 9.3k
+    - test: 2.6k
 
 - NMT model
   - transfomer: default setting of tensor2tensor, NMT trained on sentence-level
