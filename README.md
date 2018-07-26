@@ -20,41 +20,41 @@ Therefore, it becomes possible to translate the considering context using only f
 This is efficient because there are fewer document-level parallel corpus than sentence-level 
 
 
+## Architecture of Proposed model (reranker)
+![architecture of model](/images/ma.png "model")
+
+
 ## Proposed model (reranker)
 - Input: sentences translated by NMT
 - Output: score considering the relationship between each sentences
 
-Porposed method has some encoders (maybe 3 encoders) and output layer (maybe RNN).
+Porposed method has two encoders and output layer.
 Each encoder is initialized by the encoder which is trained by Quick-Thought.
 I train proposed model to distinguish negative example from positive example, where gold label of negative example is 0 and gold label of positive example is 1.
-- negative example: sentences translated by NMT using document-level japanese monolingual corpus
-- positive example: sentences in document-level English monolingual corpus
+- negative example: sentences translated by NMT using document-level japanese parallel corpus
+- positive example: sentences in document-level English parallel corpus
 
 We use Viterbi algorithm to optimally re-rank translated candidates on document-level.
-We use translated candidates as nodes and score path with Quick-Thought [1].
+We use translated candidates as nodes and score path with Quick-Thought.
 We can score path considering a whole document.
 
 
 ## Experiment setting
-- data (ja-en)
-  - train
-      - ted (0.2M) https://wit3.fbk.eu/
-
-  - dev
-      - ted (9K)
-
-  - test
-      - ted (2.6k)
+- We use TED corpus (ja-en) for experiments. (https://wit3.fbk.eu/)
+  - train: 0.2M
+  - dev: 9k
+  - test: 2.6k
 
 - NMT model
   - transfomer
 
 ## Experiment (BLEU)
 - w/o re-ranking (baseline): 12.85
-- QT 5-best: 13.33
+- QT 20-best: 13.33
+- TQT 20-best: 
 
 
-## Problems
+## Future works
 - I need to find out examples
 - I don't finish to write another proposed method
 
