@@ -24,8 +24,9 @@ This is efficient in cases where there exists fewer document-level parallel corp
 <img src="/images/parts.png" width="50%">
 </div>
 
-1. Training the Machine Translation (MT) model by sentence-level parallel corpus and MT model generates N-best candidates
-2. Reranker scores each pass made by candidates (forward)
+1. Train the NMT model on sentence-level parallel corpus.
+2. Generate N-best candidates using trained NMT model.
+2. Score each pass between candidates (forward) using Reranker
 3. 後ろから最適なパスをたどることでベストな組み合わせを見つける (backward)
 
 
