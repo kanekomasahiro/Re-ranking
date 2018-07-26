@@ -12,6 +12,9 @@ Re-ranking the output of neural machine translation (NMT) system by considering 
 
 
 ## Overview
+<div align="center">
+<img src="/images/ambiguity.png" width="80%">
+</div>
 We propose a re-ranking method which effectively consider the context information by using transfer learning and Viterbi algorithm on low-resource document-level parallel corpus.
 Context information is very important for some NLP tasks, because it has an effect on the ambiguity of the input sentence and the consistency of the output sentences.
 On the other hand, previous document-level re-ranking methods can't effectively model sentence representation and relationship between each sentences.
@@ -21,9 +24,6 @@ And we improve total quality on document-level by using Viterbi algorithm to sel
 We propose the transfer learning using low-resource document-level parallel corpus.
 Therefore, it becomes possible to translate by considering the context using low-resource document-level parallel corpora and high-resource document-level monolingual corpora of the target side.
 This is efficient in cases where there exists fewer document-level parallel corpora than sentence-level parallel corpora.
-<div align="center">
-<img src="/images/ambiguity.png" width="80%">
-</div>
 
 
 ## Flow of re-ranking using Viterbi algorithm
