@@ -52,7 +52,7 @@ This is efficient in cases where there exists fewer document-level parallel corp
 - Input: sentences translated by NMT
 - Output: score considering the relationship between each sentences
 
-Porposed method has two encoders and an output layer.
+Proposed method has two encoders and an output layer.
 Each encoder is initialized using the parameters of encoder trained by Quick-Thought.
 I train proposed model to distinguish negative examples from positive examples, where gold label for negative examples is 0 and gold label for positive examples is 1.
 Here,
