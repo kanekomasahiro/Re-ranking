@@ -34,11 +34,11 @@ This is efficient in cases where there exists fewer document-level parallel corp
 2. Score each pass between candidates (forward) using DoRe
 3. Find the best combination by tracing the best path from the end (backward)
 
-## Architecture of Proposed model (Reranker)
+## Architecture of Proposed model (DoRe)
 ![architecture of model](/images/ma.png "ma")
 
 
-## How to train Proposed model (Reranker)
+## How to train Proposed model (DoRe)
 ![how to train model](/images/model.png "model")
 
 
@@ -87,4 +87,4 @@ We use softmax function for training and sigmoid function for testing.
 
 
 ## Related Work
-1. AN EFFICIENT FRAMEWORK FOR LEARNING.SENTENCE REPRESENTATIONS, Lajanugen Logeswaran et al, ICLR, 2018
+1. AN EFFICIENT FRAMEWORK FOR LEARNING SENTENCE REPRESENTATIONS, Lajanugen Logeswaran et al, ICLR, 2018
