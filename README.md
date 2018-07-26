@@ -2,6 +2,11 @@
 
 This code is based on Lajanugen Logeswaran's TensorFlow [Quick-Thought Vectors](https://github.com/lajanugen/S2V) code.
 
+
+## Who am I
+[Masahiro Kaneko](https://sites.google.com/view/masahirokaneko)
+
+
 ## Key idea
 Re-ranking the output of neural machine translation (NMT) system by considering the context information using a reranker pre-trained by Quick-Thought and Viterbi algorithm.
 
