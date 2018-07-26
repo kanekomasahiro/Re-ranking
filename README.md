@@ -4,6 +4,10 @@
 Re-ranking output of neural machine translation system to consider context information using a reranker pre-trained by Quick-Thought and Viterbi algorithm.
 
 
+## Requirement
+- python 2
+
+
 ## Overview
 We propose a re-ranking method to consider context information without parallel corpus of the document-level.
 Context information is very important for some NLP tasks.
