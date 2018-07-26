@@ -24,7 +24,7 @@ We need to do the below things before re-ranking:
 2. MT model generates N-best translated candidates  
 
 Our proposed re-ranking method is below:
-
+![vitebi](/images/viterbi.png "viterbi")
 
 
 
