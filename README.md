@@ -59,8 +59,8 @@ We use softmax function for training and sigmoid function for testing.
 
 
 ## Experiment setting
-- We use document-level [TED corpus](https://wit3.fbk.eu/) (Japanese-->English) for experiments.
-- TED train corpus is document corpus but I train MT model by sentence-level to check our proposed method effect.
+- We use document-level [TED corpus](https://wit3.fbk.eu/) (Japanese->English) for experiments.
+- TED is document-level corpus, however I train NMT model on sentence-level to examine the effect of our proposed method.
 - We use TED dev corpus for transfer learning of reranker. 420文だけ分割してdevとして使う
   - train: 200k
   - dev: 9.3k
@@ -78,8 +78,8 @@ We use softmax function for training and sigmoid function for testing.
 
 
 ## Future works
-- Comparing previous work
-- 他のタスクに適用してみる
+- Comparing with previous work
+- Apply the proposed method to other tasks
 
 
 ## Thank you
