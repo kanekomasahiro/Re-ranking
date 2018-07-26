@@ -73,8 +73,8 @@ We use softmax function for training and sigmoid function for testing.
 | Model | BLEU |
 ----|---- 
 | w/o re-ranking (baseline) | 12.85 |
-| DoRe 20-best | 13.33 |
-| QDoRe 20-best | 13.44 |
+| QT 20-best | 13.33 |
+| DoRe 20-best | 13.44 |
 
 
 ## Future works
