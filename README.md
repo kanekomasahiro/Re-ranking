@@ -83,7 +83,7 @@ We use softmax function in training and sigmoid function in inference.
 
 
 ## Thank you
-- Mentor: 
+- Mentor: Hyeongseok Oh
 
 
 ## Related Work
