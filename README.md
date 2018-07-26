@@ -18,15 +18,25 @@ Therefore, it becomes possible to translate the considering context using only f
 This is efficient because there are fewer document-level parallel corpus than sentence-level 
 
 
-## Architecture of Proposed model (reranker)
+## Flow of re-ranking
+We need to do the below things before re-ranking:
+1. Training the MT model by sentence-level parallel corpus
+2. MT model generates N-best translated candidates  
+
+Our proposed re-ranking method
+
+
+
+## Architecture of Proposed model (Reranker)
 ![architecture of model](/images/model.png "model")
 
+Porposed method has two encoders and output layer.
 
-## Architecture of Proposed model (reranker)
+## How to train Proposed model (reranker)
 ![how to train model](/images/ma.png "ma")
 
 
-## Proposed model (reranker)
+## Proposed model (Reranker)
 - Input: sentences translated by NMT
 - Output: score considering the relationship between each sentences
 
@@ -43,6 +53,7 @@ We can score path considering a whole document.
 
 ## Experiment setting
 - We use TED corpus (ja-en) for experiments. (https://wit3.fbk.eu/)
+- TED train corpus is document corpus but I train MT model by sentence-level to check our proposed method effect.
   - train: 0.2M
   - dev: 9k
   - test: 2.6k
