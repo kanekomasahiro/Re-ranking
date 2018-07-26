@@ -20,6 +20,9 @@ This is efficient because there are fewer document-level parallel corpus than se
 
 ## Flow of re-ranking by using viterbi algorithm
 ![vitebi](/images/viterbi.png "viterbi")
+<div align="center">
+<img src="/images/parts.png" width="50%">
+</div>
 
 1. Training the Machine Translation (MT) model by sentence-level parallel corpus and MT model generates N-best candidates
 2. Reranker scores each pass made by candidates (forward)
@@ -28,9 +31,6 @@ This is efficient because there are fewer document-level parallel corpus than se
 
 ## Architecture of Proposed model (Reranker)
 ![architecture of model](/images/ma.png "ma")
-<div align="center">
-<img src="/images/parts.png" width="50%">
-</div>
 
 Porposed method has two encoders and output layer.
 
