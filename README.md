@@ -3,7 +3,7 @@
 This code is based on Lajanugen Logeswaran's TensorFlow [Quick-Thought Vectors](https://github.com/lajanugen/S2V) code.
 
 
-## Who am I
+## Who am I?
 [Masahiro Kaneko](https://sites.google.com/view/masahirokaneko)
 
 
