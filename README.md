@@ -86,7 +86,7 @@ We use softmax function for training and sigmoid function for testing.
   - QT 20-best: Reranking the 20-best candidates using QT
   - DoRe 20-best: Reranking the 20-best candidates using proposed approach
 
-## Experiment (BLEU)
+## Experiment ([BLEU](https://en.wikipedia.org/wiki/BLEU))
 | Model | BLEU |
 ----|---- 
 | w/o re-ranking (baseline) | 12.85 |
