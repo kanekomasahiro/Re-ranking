@@ -28,6 +28,7 @@ This is efficient because there are fewer document-level parallel corpus than se
 
 ## Architecture of Proposed model (Reranker)
 ![architecture of model](/images/ma.png "ma")
+![parts of model](/images/parts.png "parts")
 
 Porposed method has two encoders and output layer.
 
