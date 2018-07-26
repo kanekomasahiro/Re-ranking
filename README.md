@@ -1,7 +1,6 @@
 # Document level re-ranking
 
-This code is based on Lajanugen Logeswaran's TensorFlow [Quick-Thought Vectors] (https://github.com/lajanugen/S2V) code.
-[I'm an inline-style link](https://www.google.com)
+This code is based on Lajanugen Logeswaran's TensorFlow [Quick-Thought Vectors](https://github.com/lajanugen/S2V) code.
 
 ## Key idea
 Re-ranking output of neural machine translation system to consider context information using a reranker pre-trained by Quick-Thought and Viterbi algorithm.
