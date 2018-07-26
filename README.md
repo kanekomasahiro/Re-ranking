@@ -20,7 +20,7 @@ Therefore, it becomes possible to translate the considering context using only f
 This is efficient because there are fewer document-level parallel corpus than sentence-level 
 
 
-## Proposed model
+## Proposed model (reranker)
 - Input: sentences translated by NMT
 - Output: score considering the relationship between each sentences
 
@@ -50,15 +50,13 @@ We can score path considering a whole document.
   - transfomer
 
 ## Experiment (BLEU)
-- w/o re-ranking: 12.85
+- w/o re-ranking (baseline): 12.85
 - QT 5-best: 13.33
-
-Previous method consider context by window and score by similarity of the bag-of-word vector
 
 
 ## Problems
-- I am writing code of reranker (I'm not familiar with initializing the parts of the model)
-- N-best outputs and greedy output of NMT are different
+- I need to find out examples
+- I don't finish to write another proposed method
 
 
 ## Related Work
