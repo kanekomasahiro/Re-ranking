@@ -66,9 +66,13 @@ We can score path considering a whole document.
   - transfomer
 
 ## Experiment (BLEU)
-- w/o re-ranking (baseline): 12.85
 - QT 20-best: 13.33
 - TQT 20-best: 13.44
+| Model | BLEU |
+----|---- 
+| w/o re-ranking (baseline) | 12.85 |
+| QT 20-best | 13.33 |
+| TQT 20-best | 13.44 |
 
 
 ## Future works
