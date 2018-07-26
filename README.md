@@ -1,4 +1,4 @@
-# Document level re-ranking
+# Document level re-ranking for NMT
 
 This code is based on Lajanugen Logeswaran's TensorFlow [Quick-Thought Vectors](https://github.com/lajanugen/S2V) code.
 
@@ -18,7 +18,7 @@ Therefore, it becomes possible to translate the considering context using only f
 This is efficient because there are fewer document-level parallel corpus than sentence-level 
 
 
-## Flow of re-ranking
+## Flow of re-ranking by using viterbi algorithm
 ![vitebi](/images/viterbi.png "viterbi")
 
 We need to do the below things before re-ranking
@@ -58,6 +58,7 @@ We can score path considering a whole document.
 ## Experiment setting
 - We use TED corpus (ja-en) for experiments. (https://wit3.fbk.eu/)
 - TED train corpus is document corpus but I train MT model by sentence-level to check our proposed method effect.
+- We use TED dev corpus for transfer learning of reranker. 500文だけ分割してdevとして使う
   - train: 0.2M
   - dev: 9k
   - test: 2.6k
@@ -74,15 +75,12 @@ We can score path considering a whole document.
 
 
 ## Future works
-- I need to find out examples
-- I don't finish to write another proposed method
+- Comparing previous work
+- 他のタスクに適用してみる
 
 
-## Requirement
-- python 2
-
-
-## 
+## Thank you
+- Mentor: 
 
 
 ## Related Work
