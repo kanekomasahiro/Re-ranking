@@ -21,7 +21,11 @@ This is efficient because there are fewer document-level parallel corpus than se
 
 
 ## Architecture of Proposed model (reranker)
-![architecture of model](/images/ma.png "model")
+![architecture of model](/images/model.png "model")
+
+
+## Architecture of Proposed model (reranker)
+![how to train model](/images/ma.png "model")
 
 
 ## Proposed model (reranker)
