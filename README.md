@@ -32,13 +32,11 @@ This is efficient because there are fewer document-level parallel corpus than se
 ## Architecture of Proposed model (Reranker)
 ![architecture of model](/images/ma.png "ma")
 
-Porposed method has two encoders and output layer.
 
 ## How to train Proposed model (Reranker)
 ![how to train model](/images/model.png "model")
 
 
-## Proposed model (Reranker)
 - Input: sentences translated by NMT
 - Output: score considering the relationship between each sentences
 
@@ -50,13 +48,14 @@ I train proposed model to distinguish negative example from positive example, wh
 
 We use Viterbi algorithm to optimally re-rank translated candidates on document-level.
 We use translated candidates as nodes and score path with Quick-Thought.
-We can score path considering a whole document.
+We can score path considering a whole document.  
+We use softmax function in training and sigmoid function in inference.
 
 
 ## Experiment setting
-- We use TED corpus (ja-en) for experiments. (https://wit3.fbk.eu/)
+- We use TED corpus [TED corpus](https://wit3.fbk.eu/) (Japanese-English) for experiments.
 - TED train corpus is document corpus but I train MT model by sentence-level to check our proposed method effect.
-- We use TED dev corpus for transfer learning of reranker. 500文だけ分割してdevとして使う
+- We use TED dev corpus for transfer learning of reranker. 420文だけ分割してdevとして使う
   - train: 0.2M
   - dev: 9k
   - test: 2.6k
