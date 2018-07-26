@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/home/kaneko/S2V/src/')
+sys.path.append('/home/masahirokaneko/S2V/src/')
 import tensorflow as tf
 import configuration
 import encoder_manager
@@ -23,9 +23,9 @@ class Scoring():
         tf.flags.DEFINE_boolean("use_norm", False,
                                 "Normalize sentence embeddings during evaluation")
         tf.flags.DEFINE_integer("sequence_length", 50, "Max sentence length considered")
-        tf.flags.DEFINE_string("model_config", "/home/kaneko/S2V/model_hyperparameter.json", "Model configuration json")
-        tf.flags.DEFINE_string("results_path", "/home/kaneko/S2V/pre-trained_model/models/", "Model results path")
-        tf.flags.DEFINE_string("Glove_path", "/home/kaneko/S2V/pre-trained_model/dictionaries/GloVe", "Path to Glove dictionary")
+        tf.flags.DEFINE_string("model_config", "/home/masahirokaneko/S2V/model_hyperparameter.json", "Model configuration json")
+        tf.flags.DEFINE_string("results_path", "/home/masahirokaneko/S2V/pre-trained_model/models/", "Model results path")
+        tf.flags.DEFINE_string("Glove_path", "/home/masahirokaneko/pre-trained_model/dictionaries/GloVe", "Path to Glove dictionary")
 
         self.model = self.load_model(self.FLAGS)
 
@@ -59,16 +59,16 @@ class Scoring():
                 pres.append(pre_sentence.lower())
                 curs.append(cur_sentence.lower())
 
-        pre_embs = self.model.encode(pres)
-        cur_embs = self.model.encode(curs)
+        _, pre_embs = self.model.encode(pres)
+        cur_embs, _ = self.model.encode(curs)
+        scores = np.sum((pre_embs*cur_embs), axis=1)
+        return scores
+
         pre_embs1 = pre_embs[0][0]
         pre_embs2 = pre_embs[1][0]
         cur_embs1 = cur_embs[0][1]
         cur_embs2 = cur_embs[1][1]
-        #pre_embs = np.mean(np.stack((pre_embs1[0], pre_embs2[0]), axis=1), axis=1)
-        #cur_embs = np.mean(np.stack((cur_embs1[0], cur_embs2[0]), axis=1), axis=1)
         scores = [np.inner(np.mean(np.stack((pre_embs1[i], pre_embs2[i]), axis=1), axis=1),
                     np.mean(np.stack((cur_embs1[i], cur_embs2[i]), axis=1), axis=1)) for i in range(len(pre_embs1))]
-        #scores = [np.inner(u, v) for u, v in zip(pre_embs, cur_embs)]
 
         return scores

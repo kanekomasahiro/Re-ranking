@@ -1,7 +1,7 @@
 from collections import defaultdict
 import numpy as np
 import sys
-sys.path.append('/home/kaneko/S2V/')
+sys.path.append('/home/masahirokaneko/S2V/')
 from scoring import Scoring
 import pickle
 
@@ -18,6 +18,8 @@ def viterbi(documents):
   results = []
   num_doc = 0
   for document, original_document in documents:
+    print(num_doc)
+    num_doc += 1
     best_edge = defaultdict(lambda: ['NULL' for _ in range(n_best_size)])
     best_score = defaultdict(lambda: [0 for _ in range(n_best_size)])
 
@@ -48,10 +50,11 @@ def viterbi(documents):
 
 
 def main():
-  fr = open('vitervi.data', 'rb')
+  fr = open('viterbi20.data', 'rb')
   documents = pickle.load(fr)
   results = viterbi(documents)
   for result in results:
+      result = result.encode('utf-8')
       fw.write(result+'\n')
 
 

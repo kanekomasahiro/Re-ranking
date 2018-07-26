@@ -21,6 +21,9 @@ And we improve total quality on document-level by using Viterbi algorithm to sel
 We propose the transfer learning using low-resource document-level parallel corpus.
 Therefore, it becomes possible to translate by considering the context using low-resource document-level parallel corpora and high-resource document-level monolingual corpora of the target side.
 This is efficient in cases where there exists fewer document-level parallel corpora than sentence-level parallel corpora.
+<div align="center">
+<img src="/images/ambiguity.png" width="80%">
+</div>
 
 
 ## Flow of re-ranking using Viterbi algorithm
