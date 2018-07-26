@@ -99,7 +99,7 @@ We use softmax function for training and sigmoid function for testing.
 
 
 ## Thank you
-- Mentor: Hyeongseok Oh (Kakao Brain)
+- Mentor: Hyeongseok Oh (Kakao)
 - Supervisor: [Mamoru Komachi](http://cl.sd.tmu.ac.jp/~komachi/index.en.html) (Tokyo Metropolitan University: TMU)
 - [Aizhan Imankulova](https://atimankulova.wixsite.com/mysite) (Tokyo Metropolitan University: TMU)
 - Wonchang Chung (Element AI)
