@@ -19,12 +19,15 @@ This is efficient because there are fewer document-level parallel corpus than se
 
 
 ## Flow of re-ranking
-We need to do the below things before re-ranking:
-1. Training the MT model by sentence-level parallel corpus
-2. MT model generates N-best translated candidates  
-
-Our proposed re-ranking method is below:
 ![vitebi](/images/viterbi.png "viterbi")
+
+We need to do the below things before re-ranking
+1. Training the Machine Translation (MT) model by sentence-level parallel corpus
+2. MT model generates N-best candidates  
+
+We find out the best sentences combination by viterbi algorithm
+3. Reranker scores each pass made by candidates (forward)
+4. We (backward)
 
 
 
@@ -65,7 +68,7 @@ We can score path considering a whole document.
 ## Experiment (BLEU)
 - w/o re-ranking (baseline): 12.85
 - QT 20-best: 13.33
-- TQT 20-best: 
+- TQT 20-best: 13.44
 
 
 ## Future works
