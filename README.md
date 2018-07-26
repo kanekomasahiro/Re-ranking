@@ -40,6 +40,11 @@ This is efficient in cases where there exists fewer document-level parallel corp
 
 ## Quick-Thought (QT)
 ![Quick-Thought](/images/QT.png "qt")
+Our proposed reranker use quick-thoughts (QT) to initialize the encoder of our proposed method.
+The advantages of using QT to initialize are below:
+- QT needs only document-level monolingual corpora to train, so we can get the benefits of the document-level monolingual corpora that exists on a large scale.
+- QT is trained by modeling the relationship of adjacent sentences, so it is effective for re-ranking by relationship between each sentences.
+
 
 ## Architecture of Proposed model (DoRe)
 ![architecture of model](/images/ma.png "ma")
