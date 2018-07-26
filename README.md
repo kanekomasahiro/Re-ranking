@@ -63,7 +63,7 @@ We use softmax function in training and sigmoid function in inference.
 - NMT model
   - transfomer: default setting of tensor2tensor
 
-## Experiment (BLEU)
+## Experiment ([BLEU](https://en.wikipedia.org/wiki/BLEU))
 | Model | BLEU |
 ----|---- 
 | w/o re-ranking (baseline) | 12.85 |
