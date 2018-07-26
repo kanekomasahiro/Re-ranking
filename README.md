@@ -53,7 +53,7 @@ We use softmax function in training and sigmoid function in inference.
 
 
 ## Experiment setting
-- We use TED corpus [TED corpus](https://wit3.fbk.eu/) (Japanese-English) for experiments.
+- We use [TED corpus](https://wit3.fbk.eu/) (Japanese-English) for experiments.
 - TED train corpus is document corpus but I train MT model by sentence-level to check our proposed method effect.
 - We use TED dev corpus for transfer learning of reranker. 420文だけ分割してdevとして使う
   - train: 0.2M
