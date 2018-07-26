@@ -9,16 +9,15 @@ Re-ranking output of neural machine translation system to consider context infor
 
 
 ## Overview
-We propose a re-ranking method to consider context information without parallel corpus of the document-level.
-Context information is very important for some NLP tasks.
-Because it has an effect on the ambiguity of the input sentence and the consistency of the output.
+We propose a re-ranking method to consider context information effectively by using transfer learning and viterbi algorithm on few parallel corpus of the document-level.
+Context information is very important for some NLP tasks, because it has an effect on the ambiguity of the input sentence and the consistency of the output.
 On the other hand, previous document-level re-ranking methods can't effectively model sentence representation and relationship between each sentences.
-Moreover, the best sentences are determined by looking at only the temporal relationship, and the best sentences is not necessarily selected when looking at the whole document.
+Moreover, the best sentences are determined by looking at only the temporal relationship, and the best sentences are not necessarily selected when looking at the whole document.
 Therefore, we acquire a more effective reranker by transfer-learning sentence vectors learned by considering relations between sentences.
-And we improve total quality in document-level by using Viterbi algorithm to select the sentence in the final selecting process.
-We propose the transfer learning without using the document-level parallel corpus.
-Therefore, it becomes possible to translate the considering context using sentence-level parallel corpora and document-level monolingual corpora only.
-This is efficient because there are fewer document-level parallel corpus than sentence-level parallel corpus.
+And we improve total quality in document-level by using viterbi algorithm to select the sentence in the final selecting process.
+We propose the transfer learning using few parallel corpora in document-level.
+Therefore, it becomes possible to translate the considering context using only few document-level parallel corpora and document-level monolingual corpora of target side.
+This is efficient because there are fewer document-level parallel corpus than sentence-level 
 
 
 ## Proposed model
@@ -36,35 +35,25 @@ We use translated candidates as nodes and score path with Quick-Thought [1].
 We can score path considering a whole document.
 
 
-## Data (ja-en)
-- train
-    - open-subtitle 2018 (2M) http://opus.nlpl.eu/OpenSubtitles2018.php
-    - ted (0.2M) https://wit3.fbk.eu/
+## Experiment setting
+- data (ja-en)
+  - train
+      - ted (0.2M) https://wit3.fbk.eu/
 
-- dev
-    - ted (9K)
+  - dev
+      - ted (9K)
 
-- test
-    - ted (2.6k)
+  - test
+      - ted (2.6k)
 
+- NMT model
+  - transfomer
 
 ## Experiment (BLEU)
-- Train data (ted)
-    - Baseline (transfomer): 13.84 (dev), 12.97 (test)
-    - Previous method[2]:
-    - Proposed method:
-- Train data (open-subtitle)
-    - Baseline (transfomer): coming soon!
-    - Previous method[2]:
-    - Proposed method:
+- w/o re-ranking: 12.85
+- QT 5-best: 13.33
 
 Previous method consider context by window and score by similarity of the bag-of-word vector
-
-
-## Progresses
-- Pre-trained Quick-Thought model is open to the public
-- Training NMT model
-- Writing Viterbi algorithm.
 
 
 ## Problems
@@ -74,5 +63,3 @@ Previous method consider context by window and score by similarity of the bag-of
 
 ## Related Work
 1. AN EFFICIENT FRAMEWORK FOR LEARNING.SENTENCE REPRESENTATIONS, Lajanugen Logeswaran et al, ICLR, 2018
-2. Document-level Re-ranking
-with Soft Lexical and Semantic Features for Statistical Machine Translation, Chenchen Ding et al, AMTA, 2014
