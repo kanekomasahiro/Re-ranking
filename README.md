@@ -67,7 +67,7 @@ Here,
 We use Viterbi algorithm to optimally re-rank translated candidates on document-level.
 We use translated candidates as nodes and score path using reranker.
 We can score path considering a whole document.  
-We use softmax function for training and sigmoid function for testing.
+We use softmax function while training and sigmoid function while testing.
 
 
 ## Experiment setting
