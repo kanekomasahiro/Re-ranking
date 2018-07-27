@@ -95,7 +95,7 @@ We use softmax function while training and sigmoid function while testing.
 
 
 ## Future works
-- Comparing with previous work [2]
+- Comparing with previous work[2]
 - Apply the proposed method to other tasks
 
 
