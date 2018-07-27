@@ -40,6 +40,8 @@ This is efficient in cases where there exists fewer document-level parallel corp
 
 ## Quick-Thought (QT)
 ![Quick-Thought](/images/QT.png "qt")
+- negative example: NMT translation of source side of document-level parallel corpus
+- positive example: original target side of document-level parallel corpus
 Our proposed reranker use quick-thoughts (QT) [1] to initialize the encoder of our proposed method.
 The advantages of using QT to initialize are below:
 - QT needs only document-level monolingual corpora to train, so we can get the benefits of the document-level monolingual corpora that exists on a large scale.
@@ -49,14 +51,11 @@ The advantages of using QT to initialize are below:
 ## Architecture of Proposed model (DoRe)
 ![architecture of model](/images/ma.png "ma")
 
-
-## How to train Proposed model (DoRe)
-![how to train model](/images/model.png "model")
-
-
 - Input: sentences translated by NMT
 - Output: score considering the relationship between each sentences
 
+## How to train Proposed model (DoRe)
+![how to train model](/images/model.png "model")
 Proposed method has two encoders and an output layer.
 Each encoder is initialized using the parameters of encoder trained by Quick-Thought.
 I train proposed model to distinguish negative examples from positive examples, where gold label for negative examples is 0 and gold label for positive examples is 1.
