@@ -95,7 +95,7 @@ We use softmax function for training and sigmoid function for testing.
 
 
 ## Future works
-- Comparing with previous work
+- Comparing with previous work [2]
 - Apply the proposed method to other tasks
 
 
@@ -110,3 +110,4 @@ We use softmax function for training and sigmoid function for testing.
 
 ## Related Work
 1. AN EFFICIENT FRAMEWORK FOR LEARNING SENTENCE REPRESENTATIONS, Lajanugen Logeswaran et al, ICLR, 2018
+2. Document-level Re-ranking with Soft Lexical and Semantic Features for Statistical Machine Translation, Chenchen Ding et al, AMTA, 2014
