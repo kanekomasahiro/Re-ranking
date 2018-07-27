@@ -43,10 +43,10 @@ This is efficient in cases where there exists fewer document-level parallel corp
 - negative example: NMT translation of source side of document-level parallel corpus
 - positive example: original target side of document-level parallel corpus
 
-Our proposed reranker use quick-thoughts (QT) [1] to initialize the encoder of our proposed method.
-The advantages of using QT to initialize are below:
+We use QT [1] to initialize the encoder of our proposed reranker.
+The advantages of using QT for initialization are below:
 - QT needs only document-level monolingual corpora to train, so we can get the benefits of the document-level monolingual corpora that exists on a large scale.
-- QT is trained by modeling the relationship of adjacent sentences, so it is effective for re-ranking by relationship between each sentences.
+- QT is trained by modeling the relationship of adjacent sentences, so it is effective for re-ranking relationship of each sentence.
 
 
 ## Architecture of Proposed model (DoRe)
